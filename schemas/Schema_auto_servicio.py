@@ -8,8 +8,3 @@ Proceso = "En proceso"
 Realizado = "Realizado"
 
 # pylint: disable=too-few-public-methods
-
-
-
-
-
