@@ -1,25 +1,24 @@
 '''
 Docstring for schemas.schema_rol
 '''
-
 from pydantic import BaseModel
 from datetime import datetime
+from pydantic import ConfigDict
 class RolBase(BaseModel):
-    '''Esquema base para los roles'''
+    '''Clase para modelar los campos de tabla Rol'''
     nombre_rol: str
-    estado: bool = True
+    estado: bool
     fecha_registro: datetime
     fecha_actualizacion: datetime
-
+# pylint: disable=too-few-public-methods, unnecessary-pass
 class RolCreate(RolBase):
-    '''Esquema para crear un nuevo rol'''
+    '''Clase para crear un Rol basado en la tabla Rols'''
     pass
 class RolUpdate(RolBase):
-    '''Esquema para actualizar un rol existente'''
+    '''Clase para actualizar un Rol basado en la tabla Rols'''
     pass
-class Rol(RolBase):
-    '''Esquema para representar un rol en la base de datos'''
-    id: int
 
-    class Config:
-        orm_mode = True
+class Rol(RolBase):
+    '''Clase para realizar operaciones por ID en tabla Rol'''
+    Id: int
+    model_config = ConfigDict(from_attributes=True)
