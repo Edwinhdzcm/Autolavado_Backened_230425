@@ -16,8 +16,8 @@ from routes.routes_auto_servicio import auto_servicio
 from routes.routes_auto import auto  # <--- Added this import
 
 app = FastAPI(
-    title="API Segura de Administracion de un autolavado",
-    description="Edwin Hernández Campos - 230425"
+    title="API  - AutolavadoBackend_230425",
+    description=" Alumno : Edwin Hernández Campos"
 )
 
 # Create database tables

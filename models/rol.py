@@ -1,16 +1,12 @@
-'Estra clase permite generar el modelo para los tipos de rol'
-
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Enum, Date
-from sqlalchemy.orm import relationship
+''''Esta clase permite generar el modelo para los tipos de roles'''
+from sqlalchemy import Column, Integer, String, Boolean,Column,DateTime
 from config.db import Base
 
-
-class rol(Base):
-    'Clase para especificar tabla roles de usuario' 
+class Rol(Base):
+    '''Modelo para la tabla de roles'''
     __tablename__ = "tbc_roles"
-
-    Id = Column(Interger, primary_key=True, index=True)
-    nombreRol = column(String(15))
-    Estado = column(Boolean)
-
-
+    id = Column(Integer, primary_key=True, index=True)
+    nombre_rol = Column(String(50), unique=True, index=True, nullable=False)
+    estado = Column(Boolean, default=True)
+    fecha_registro= Column(DateTime)
+    fecha_modificacion= Column(DateTime)
