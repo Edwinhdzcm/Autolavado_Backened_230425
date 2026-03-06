@@ -7,7 +7,7 @@ class Service(Base):
     '''Modelo para la tabla de servicios'''
     __tablename__ = "tbc_servicios"
     id = Column(Integer, primary_key=True, index=True)
-    nombre =Column(String(50))
+    nombre = Column(String(100), name="nombre")
     descripcion=Column(String(50))
     costo = Column(Float, nullable=False)
     duracion = Column(Integer, nullable=False)

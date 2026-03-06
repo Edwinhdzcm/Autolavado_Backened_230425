@@ -25,6 +25,4 @@ class ServicioUpdate(ServicioBase):
 class Servicio(ServicioBase):
     '''Clase para realizar operaciones por ID en tabla Servicios'''
     Id: int
-    class Config:
-        '''Utilizar el orm para ejecutar las funcionalidades'''
-        model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)

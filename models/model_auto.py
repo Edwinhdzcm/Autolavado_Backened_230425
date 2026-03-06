@@ -6,7 +6,8 @@ class Vehiculo(Base):
     __tablename__ = "tbb_vehiculos" # Revisa que este sea el nombre real de tu tabla
 
     Id = Column(Integer, primary_key=True, index=True) # Debe ser 'id' en minúsculas
-    usuario_Id = Column(Integer, ForeignKey("tbb_usuarios.Id")) # FK al usuario
+    # Busca esta línea en models/model_auto.py
+    usuario_Id = Column(Integer, ForeignKey("tbb_usuarios.Id")) # <-- Asegúrate de que la 'I' sea mayúscula
     placa = Column(String(20), unique=True)
     marca = Column(String(50))  # <--- Asegúrate que exista en tu DB
     modelo = Column(String(50))

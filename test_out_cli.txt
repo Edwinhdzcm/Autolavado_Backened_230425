@@ -1,0 +1,70 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\entornoBackend\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417
+plugins: anyio-4.12.1
+collecting ... collected 2 items
+
+tests/testEndpoint/test_RegistroServicios.py::test_crear_servicio_exitoso FAILED [ 50%]
+tests/testEndpoint/test_RegistroServicios.py::test_obtener_servicios FAILED [100%]
+
+================================== FAILURES ===================================
+_________________________ test_crear_servicio_exitoso _________________________
+
+    def test_crear_servicio_exitoso():
+        nombre_unico = f"Servicio_{uuid.uuid4().hex[:4]}"
+        payload = {
+            "nombre": nombre_unico,
+            "descripcion": "Descripción de prueba",
+            "costo": 99.99,
+            "duracion_minutos": 60,
+            "estado": True
+        }
+        # Intentamos /servicios/ o /servicio/ según tu router
+        response = client.post("/servicios/", json=payload)
+        if response.status_code == 404:
+            response = client.post("/servicio/", json=payload)
+    
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\testEndpoint\test_RegistroServicios.py:22: AssertionError
+___________________________ test_obtener_servicios ____________________________
+
+    def test_obtener_servicios():
+        response = client.get("/servicios/")
+        if response.status_code == 404:
+            response = client.get("/servicio/")
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\testEndpoint\test_RegistroServicios.py:29: AssertionError
+============================== warnings summary ===============================
+models\model_services.py:5
+  C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\models\model_services.py:5: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+schemas\schema_usuario.py:30
+  C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\schemas\schema_usuario.py:30: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Usuario(UsuarioBase):
+
+entornoBackend\Lib\site-packages\pydantic\_internal\_config.py:383
+  C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\entornoBackend\Lib\site-packages\pydantic\_internal\_config.py:383: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+schemas\schema_usuario.py:37
+  C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\schemas\schema_usuario.py:37: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class UsuarioLogin(BaseModel):
+
+schemas\schema_auto_servicio.py:23
+  C:\Users\Franc\OneDrive\Desktop\Autolavado_Backend_230417\schemas\schema_auto_servicio.py:23: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Servicio(ServicioBase):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/testEndpoint/test_RegistroServicios.py::test_crear_servicio_exitoso
+FAILED tests/testEndpoint/test_RegistroServicios.py::test_obtener_servicios
+======================== 2 failed, 5 warnings in 1.40s ========================

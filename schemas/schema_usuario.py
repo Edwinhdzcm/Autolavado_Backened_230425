@@ -30,14 +30,11 @@ class UsuarioUpdate(UsuarioBase):
 class Usuario(UsuarioBase):
     '''Clase para realizar operaciones por ID en tabla Usuario'''
     Id: int
-    class Config:
-        '''Utilizar el orm para ejecutar las funcionalidades'''
-        orm_mode =True
+    model_config = ConfigDict(from_attributes=True)
 
 class UsuarioLogin(BaseModel):
     '''Clase para realizar login por numero de telefono o correo'''
     numero_telefono: Optional[str] = None
     correo_electronico: Optional[str] = None
     contrasena: str
-    class Config:
-        model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)

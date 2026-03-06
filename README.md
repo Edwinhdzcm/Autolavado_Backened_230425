@@ -40,6 +40,8 @@ uvicorn main:app --reload
 
 6. Abrir la documentación interactiva en el navegador:
 
+fastapi dev main.py
+
 ```
 http://127.0.0.1:8000/docs
 ```

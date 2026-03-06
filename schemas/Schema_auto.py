@@ -9,7 +9,7 @@ class VehiculoBase(BaseModel):
     '''Clase para modelar los campos de tabla Vehiculo'''
     usuario_Id: int
     placa: str
-    marca: str 
+    marca: Optional[str] = None  # <--- CAMBIO AQUÍ: Permitimos que sea None (null en DB)
     modelo: str
     serie: str
     color: str
@@ -27,7 +27,7 @@ class VehiculoUpdate(VehiculoBase):
     '''Clase para actualizar un Vehiculo basado en la tabla Vehiculo'''
     usuario_Id: Optional[int] = None
     placa: Optional[str] = None
-    marca: Optional[str] = None
+    marca: Optional[str] = None 
     modelo: Optional[str] = None
     serie: Optional[str] = None
     color: Optional[str] = None

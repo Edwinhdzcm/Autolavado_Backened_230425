@@ -9,10 +9,10 @@ from schemas import schema_auto_servicio
 
 auto_servicio = APIRouter()
 
+# ================= GET TODOS LOS SERVICIOS =================
 @auto_servicio.get(
     "/auto-servicio/",
-    # CAMBIO: Se cambió AutoServicio por UsuarioVehiculoServicio
-    response_model=List[schema_auto_servicio.UsuarioVehiculoServicio], 
+    response_model=List[schema_auto_servicio.Servicio],
     tags=["AutoServicio"]
 )
 def read_auto_servicios(
@@ -24,45 +24,47 @@ def read_auto_servicios(
     return crud_auto_servicio.get_auto_servicios(db=db, skip=skip, limit=limit)
 
 
+# ================= GET SERVICIO POR ID =================
 @auto_servicio.get(
     "/auto-servicio/{id}",
-    # CAMBIO: Se cambió AutoServicio por UsuarioVehiculoServicio
-    response_model=schema_auto_servicio.UsuarioVehiculoServicio,
+    response_model=schema_auto_servicio.Servicio,
     tags=["AutoServicio"]
 )
-def read_auto_servicio(id: int, db: Session = Depends(get_db), current_user: str = Depends(auth.get_current_user)):
+def read_auto_servicio(
+    id: int, 
+    db: Session = Depends(get_db), 
+    current_user: str = Depends(auth.get_current_user)
+):
     db_auto_servicio = crud_auto_servicio.get_auto_servicio(db=db, id=id)
     if db_auto_servicio is None:
         raise HTTPException(status_code=404, detail="Registro no encontrado")
     return db_auto_servicio
 
 
+# ================= CREAR SERVICIO =================
 @auto_servicio.post(
     "/auto-servicio/",
-    # CAMBIO: Se cambió AutoServicio por UsuarioVehiculoServicio
-    response_model=schema_auto_servicio.UsuarioVehiculoServicio,
+    response_model=schema_auto_servicio.Servicio,
     status_code=status.HTTP_201_CREATED,
     tags=["AutoServicio"]
 )
 def create_auto_servicio(
-    # CAMBIO: Se cambió AutoServicioCreate por UsuarioVehiculoServicioCreate
-    auto_servicio: schema_auto_servicio.UsuarioVehiculoServicioCreate,
+    auto_servicio: schema_auto_servicio.ServicioCreate,
     db: Session = Depends(get_db),
     current_user: str = Depends(auth.get_current_user)
 ):
     return crud_auto_servicio.create_auto_servicio(db=db, auto_servicio=auto_servicio)
 
 
+# ================= ACTUALIZAR SERVICIO =================
 @auto_servicio.put(
     "/auto-servicio/{id}",
-    # CAMBIO: Se cambió AutoServicio por UsuarioVehiculoServicio
-    response_model=schema_auto_servicio.UsuarioVehiculoServicio,
+    response_model=schema_auto_servicio.Servicio,
     tags=["AutoServicio"]
 )
 def update_auto_servicio(
     id: int,
-    # CAMBIO: Se cambió AutoServicioUpdate por UsuarioVehiculoServicioUpdate
-    auto_servicio: schema_auto_servicio.UsuarioVehiculoServicioUpdate,
+    auto_servicio: schema_auto_servicio.ServicioUpdate,
     db: Session = Depends(get_db),
     current_user: str = Depends(auth.get_current_user)
 ):
@@ -76,13 +78,17 @@ def update_auto_servicio(
     return db_auto_servicio
 
 
+# ================= ELIMINAR SERVICIO =================
 @auto_servicio.delete(
     "/auto-servicio/{id}",
-    # CAMBIO: Se cambió AutoServicio por UsuarioVehiculoServicio
-    response_model=schema_auto_servicio.UsuarioVehiculoServicio,
+    response_model=schema_auto_servicio.Servicio,
     tags=["AutoServicio"]
 )
-def delete_auto_servicio(id: int, db: Session = Depends(get_db), current_user: str = Depends(auth.get_current_user)):
+def delete_auto_servicio(
+    id: int, 
+    db: Session = Depends(get_db), 
+    current_user: str = Depends(auth.get_current_user)
+):
     db_auto_servicio = crud_auto_servicio.delete_auto_servicio(db=db, id=id)
     if db_auto_servicio is None:
         raise HTTPException(status_code=404, detail="Registro no encontrado")

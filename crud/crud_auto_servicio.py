@@ -6,15 +6,15 @@ def get_auto_servicios(db: Session, skip: int = 0, limit: int = 100):
     '''Función para obtener todos los registros de auto_servicio'''
     # IMPORTANTE: Verifica si en tu archivo models_auto_servicio la clase se llama 
     # AutoServicio o UsuarioVehiculoServicio. Aquí asumo que es AutoServicio.
-    return db.query(model_auto_servicio.AutoServicio).offset(skip).limit(limit).all()
+    return db.query(model_auto_servicio.VehiculoServicio).offset(skip).limit(limit).all()
 
 def get_auto_servicio(db: Session, id: int):
     '''Función para obtener un solo registro por ID'''
-    return db.query(model_auto_servicio.AutoServicio).filter(model_auto_servicio.AutoServicio.Id == id).first()
+    return db.query(model_auto_servicio.VehiculoServicio).filter(model_auto_servicio.VehiculoServicio.Id == id).first()
 
-def create_auto_servicio(db: Session, auto_servicio: schema_auto_servicio.UsuarioVehiculoServicioCreate):
+def create_auto_servicio(db: Session, auto_servicio: schema_auto_servicio.ServicioCreate):
     '''Función para insertar un nuevo registro'''
-    db_auto_servicio = model_auto_servicio.AutoServicio(
+    db_auto_servicio = model_auto_servicio.VehiculoServicio(
         vehiculo_Id=auto_servicio.vehiculo_Id,
         cajero_Id=auto_servicio.cajero_Id,
         operativo_Id=auto_servicio.operativo_Id,
@@ -31,7 +31,7 @@ def create_auto_servicio(db: Session, auto_servicio: schema_auto_servicio.Usuari
     db.refresh(db_auto_servicio)
     return db_auto_servicio
 
-def update_auto_servicio(db: Session, id: int, auto_servicio: schema_auto_servicio.UsuarioVehiculoServicioUpdate):
+def update_auto_servicio(db: Session, id: int, auto_servicio: schema_auto_servicio.ServicioUpdate):
     '''Función para actualizar un registro existente'''
     db_obj = get_auto_servicio(db, id)
     if db_obj:
